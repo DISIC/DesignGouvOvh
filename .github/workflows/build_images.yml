@@ -36,6 +36,6 @@ jobs:
           context: ./docker_images/base
           push: true
           # tags: ${{ steps.meta.outputs.tags }}
-          tags: "designgouvovh/base:${{ env.TAG }}"
+          tags: "ghcr.io/disic/designgouvovh/base:${{ env.TAG }}"
           labels: ${{ steps.meta.outputs.labels }}
 
