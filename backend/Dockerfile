@@ -4,6 +4,8 @@ WORKDIR /usr/src/app
 
 COPY server.js package.json ./
 
+USER root
+
 RUN apk add --update nodejs npm && \
     npm install
 
