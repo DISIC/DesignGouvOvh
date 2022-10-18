@@ -22,11 +22,6 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-            echo "TAG=dev" >> $GITHUB_ENV
-          else
-            echo "TAG=${{ github.ref_name }}" >> $GITHUB_ENV
-          fi
-
       - name: Extract metadata (tags, labels) for Docker
         id: meta
         uses: docker/metadata-action@v4
