@@ -25,9 +25,9 @@ jobs:
       - name: Set tag
         run: |
           if [[ "${{ steps.meta.outputs.tags }}" == "" ]]; then
-            export TAG="dev"
+            echo "TAG="dev" >> $GITHUB_ENV
           else
-            export TAG="${{ steps.meta.outputs.tags }}"
+            export "TAG=${{ steps.meta.outputs.tags }}" >> $GITHUB_ENV
           fi
 
       - name: Build and push Docker image
@@ -36,6 +36,6 @@ jobs:
           context: ./docker_images/base
           push: true
           # tags: ${{ steps.meta.outputs.tags }}
-          tags: "designgouvovh/base:${TAG}"
+          tags: "designgouvovh/base:${{ env.TAG }}"
           labels: ${{ steps.meta.outputs.labels }}
 
