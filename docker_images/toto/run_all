@@ -1,0 +1,10 @@
+#!/usr/bin/env ash
+
+# start all services
+
+# set group owner to nginx for the socket
+# nginx
+/root/run_nginx &
+
+# wait for at least one which exits
+wait -n

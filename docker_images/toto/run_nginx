@@ -1,0 +1,22 @@
+#!/usr/bin/env ash
+
+# run nginx in foreground
+
+# nginx tries to open error.log in default location before the configuration -> create it
+# it will be used in case of config error
+mkdir -p /var/log/nginx
+
+# create /run/nginx needed for nginx.pid
+mkdir -p /run/nginx
+
+# create dhparams pem if it does not exist
+# see https://security.stackexchange.com/questions/95178/diffie-hellman-parameters-still-calculating-after-24-hours for -dsparam option
+#   else it takes several hours!
+if [[ ! -f /etc/nginx/certs/dhparams.pem ]]; then
+  openssl dhparam -dsaparam -out /etc/nginx/certs/dhparams.pem 4096
+  chmod go= /etc/nginx/certs/dhparams.pem
+fi
+
+
+exec nginx -g "daemon off;"
+
