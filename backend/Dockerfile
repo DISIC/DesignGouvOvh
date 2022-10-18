@@ -18,7 +18,7 @@ RUN \
   adduser -D -u 2003 dinum_backend && \
   \
   # install application \
-  cd /home/dinum_backend && \`
+  cd /home/dinum_backend && \
   mv /tmp/server.js /tmp/package.json . && \
   npm install && \
   \
