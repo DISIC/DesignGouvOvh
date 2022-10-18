@@ -1,4 +1,5 @@
-FROM ghcr.io/disic/designgouvovh/base:dev
+ARG  IMG_BASE=latest
+FROM ghcr.io/disic/designgouvovh/base:${IMG_BASE}
 
 WORKDIR /usr/src/app
 
