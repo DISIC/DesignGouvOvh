@@ -28,6 +28,6 @@ jobs:
           context: ./docker_images/base
           push: true
           # tags: ${{ steps.meta.outputs.tags }}
-          tags: "DesignGouvOvh/base:dev"
+          tags: "designgouvovh/base:dev"
           labels: ${{ steps.meta.outputs.labels }}
 
