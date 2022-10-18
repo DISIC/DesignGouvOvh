@@ -63,7 +63,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v3
         with:
-          context: ./backend
+          context: ./docker_images/nginx
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
@@ -91,7 +91,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: "ghcr.io/disic/designgouvovh/base"
+          images: "ghcr.io/disic/designgouvovh/backend"
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v3
