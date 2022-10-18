@@ -27,7 +27,7 @@ jobs:
           if [[ "${{ steps.meta.outputs.tags }}" == "" ]]; then
             echo "TAG="dev" >> $GITHUB_ENV
           else
-            export "TAG=${{ steps.meta.outputs.tags }}" >> $GITHUB_ENV
+            echo "TAG=${{ steps.meta.outputs.tags }}" >> $GITHUB_ENV
           fi
 
       - name: Build and push Docker image
