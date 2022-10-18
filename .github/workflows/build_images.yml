@@ -28,6 +28,7 @@ jobs:
             export TAG="dev"
           else
             export TAG="${{ steps.meta.outputs.tags }}"
+          fi
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v3
