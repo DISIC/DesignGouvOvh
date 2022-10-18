@@ -22,19 +22,11 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Set tag
-        run: |
-          if [[ "${{ github.ref_name }}" == "" ]]; then
-            echo "TAG=dev" >> $GITHUB_ENV
-          else
-            echo "TAG=${{ steps.meta.outputs.tags }}" >> $GITHUB_ENV
-          fi
-
       - name: Extract metadata (tags, labels) for Docker
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: "ghcr.io/disic/designgouvovh/base:${{ env.TAG }}"
+          images: "ghcr.io/disic/designgouvovh/base"
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v3
