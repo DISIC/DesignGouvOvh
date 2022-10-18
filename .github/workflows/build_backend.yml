@@ -10,8 +10,8 @@
 name: Build node.js server container image
 
 on:
-  push:
-    branches: [push]
+  - push
+  - tag
 
 env:
   REGISTRY: ghcr.io
