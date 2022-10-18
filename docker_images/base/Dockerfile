@@ -12,12 +12,12 @@ RUN \
   # cleanup unused cron entries \
   sed -i -e 's/^\([0-9*]\)/## \1/' /etc/crontabs/root && \
   \
-  # No history, Automatic deconnection and umask \
+  # no history, Automatic deconnection and umask \
   cp /tmp/profile_ovh /etc/profile.d/ovh.sh && \
   chmod a+r /etc/profile.d/ovh.sh && \
   cat /tmp/bashrc_add > /root/.profile && \
   \
-  # Banner \
+  # banner \
   cp /tmp/banner /etc/issue && \
   cp /tmp/banner /etc/motd && \
   \
