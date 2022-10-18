@@ -1,4 +1,4 @@
-FROM node:current-alpine3.16
+FROM ghcr.io/disic/designgouvovh/base:dev
 
 WORKDIR /usr/src/app
 
