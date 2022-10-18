@@ -25,7 +25,7 @@ jobs:
       - name: Set tag
         run: |
           if [[ "${{ steps.meta.outputs.tags }}" == "" ]]; then
-            echo "TAG="dev" >> $GITHUB_ENV
+            echo "TAG=dev" >> $GITHUB_ENV
           else
             echo "TAG=${{ steps.meta.outputs.tags }}" >> $GITHUB_ENV
           fi
