@@ -22,12 +22,19 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Set tag
+        run: |
+          if [[ "${{ steps.meta.outputs.tags }}" == "" ]]; then
+            export TAG="dev"
+          else
+            export TAG="${{ steps.meta.outputs.tags }}"
+
       - name: Build and push Docker image
         uses: docker/build-push-action@v3
         with:
           context: ./docker_images/base
           push: true
           # tags: ${{ steps.meta.outputs.tags }}
-          tags: "designgouvovh/base:${{ steps.meta.outputs.tags }}"
+          tags: "designgouvovh/base:${TAG}"
           labels: ${{ steps.meta.outputs.labels }}
 
