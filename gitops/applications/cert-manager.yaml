@@ -1,19 +1,19 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argo-cd
-  namespace: argo
+  name: cert-manager
+  namespace: cert-manager
 spec:
   project: default
   source:
     helm:
       valueFiles:
         - values-dinum.yaml
-    path: gitops/argo-cd
+    path: gitops/cert-manager
     repoURL: ssh://git@github.com/DISIC/DesignGouvOvh.git
     targetRevision: HEAD
   destination:
-    namespace: argo
+    namespace: cert-manager
     server: https://kubernetes.default.svc
 #  syncPolicy:
 #    automated:
