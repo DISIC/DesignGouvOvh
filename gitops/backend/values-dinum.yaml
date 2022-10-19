@@ -14,6 +14,13 @@ imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
+server:
+  port: 8085
+  db:
+    db_url: psql://addr.com/db
+    db_user: user1
+    db_password: password1
+
 serviceAccount:
   # Specifies whether a service account should be created
   create: true
@@ -38,7 +45,7 @@ securityContext:
 
 service:
   type: ClusterIP
-  port: 80
+  port: 8085
 
 ingress:
   enabled: false
