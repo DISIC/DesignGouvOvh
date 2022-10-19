@@ -1,0 +1,43 @@
+#!/usr/bin/env ash
+
+#
+# run nginx in foreground
+#
+# environment variables:
+#   TOMCAT_SERVER: tomcat server (http(s)://hostname:port)
+#
+
+
+# exit in case of error -> pod in error
+set -e
+
+# check variables
+for var in TOMCAT_SERVER; do
+  if [[ -z "$(eval echo "\${$var}")" ]]; then
+    echo "** variable ${var} has not been set"
+    exit 1
+  fi
+done
+
+# adapt ssmtp configuration
+# no need for nginx!
+###sed -i -e 's/^mailhub=.*$/mailhub='"${SMTP_SERVER}:${SMTP_PORT}/" /etc/ssmtp/ssmtp.conf
+
+# get DNS server for container (normally, might be 127.0.0.11)
+RESOLVER="$(awk '$1 == "nameserver" {print $2}' /etc/resolv.conf)"
+sed -e "s/\\\$\\\$RESOLVER\\\$\\\$/${RESOLVER}/" /etc/nginx/dpl/locations/default_dpl.conf.ref > /etc/nginx/dpl/locations/default_dpl.conf
+sed -e 's-^  include dpl/disable/php.conf;-  # include dpl/disable/php.conf;-' /etc/nginx/dpl/locations/default_dpl.conf > /etc/nginx/dpl/locations/default_dpl_with_php.conf
+chmod go= /etc/nginx/dpl/locations/default_dpl.conf /etc/nginx/dpl/locations/default_dpl.conf
+
+# set tomcat upstream server
+sed -i -e "s#XXXTOMCATXXX#${TOMCAT_SERVER}#" /etc/nginx/dpl/upstreams_dyn/azuneed_tomcat.conf
+
+# nginx tries to open error.log in default location before the configuration -> create it
+# it will be used in case of config error
+mkdir -p /var/log/nginx
+
+# create /run/nginx needed for nginx.pid
+mkdir -p /run/nginx
+
+exec nginx -g "daemon off;"
+
