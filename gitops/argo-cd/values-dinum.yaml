@@ -78,6 +78,32 @@ configs:
     # @default -- `""` (defaults to current time)
     argocdServerAdminPasswordMtime: "2022-10-12T00:00:00Z"
 
+  knownHosts:
+    data:
+      # gitlab
+      ssh_known_hosts: |
+        github.com ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBEmKSENjQEezOmxkZMy7opKgwFB9nkt5YRrYMjNuG5N87uRgg6CLrbo5wAdT/y6v0mKV0U2w0WZ2YB/++Tpockg=
+
+  # -- Repository credentials to be used as Templates for other repos
+  ## Creates a secret for each key/value specified below to create repository credentials
+  credentialTemplates:
+    ssh-creds:
+      url: ssh://git@github.com/DISIC/DesignGouvOvh.gitu
+      sshPrivateKey: |
+        -----BEGIN OPENSSH PRIVATE KEY-----
+        b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAMwAAAAtzc2gtZW
+        QyNTUxOQAAACA0RlzkMw6+aHFJppl631rBjN1WfMQxCNdWitMYjizVpAAAAKAsuNp4LLja
+        eAAAAAtzc2gtZWQyNTUxOQAAACA0RlzkMw6+aHFJppl631rBjN1WfMQxCNdWitMYjizVpA
+        AAAEAu07v6lzO36RV5Gbe7Qa/yUtzOu5hRRLwfdeFEkmkbvTRGXOQzDr5ocUmmmXrfWsGM
+        3VZ8xDEI11aK0xiOLNWkAAAAGW92aF9zc2h1c2VyQGxlamF2LWJhc3Rpb24BAgME
+        -----END OPENSSH PRIVATE KEY-----
+
+  repositories:
+    github-gitops:
+      name: git-gitops
+      type: git
+      url: ssh://git@github.com/DISIC/DesignGouvOvh.git
+
 notifications:
   # -- Enable Notifications controller
   enabled: false
